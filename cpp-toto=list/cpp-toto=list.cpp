@@ -6,19 +6,17 @@
 #include <list>
 #include <ctime>
 
-using namespace std; // TODO: Remove this later
-
 class TodoItem {
 private:
     int id;
-    string description;
+    std::string description;
     bool completed;
 
 public:
     TodoItem() : id(0), description(""), completed(false) {}
     ~TodoItem() = default;
 
-    bool create(string new_description) {
+    bool create(std::string new_description) {
         // RNG between 1 to 100
         id = rand() % 100 + 1;
         description = new_description;
@@ -26,7 +24,7 @@ public:
     }
 
     int getId() { return id; }
-    string getDescription() { return description; }
+    std::string getDescription() { return description; }
     bool isCompleted() { return completed; }
     void makeComplete(bool boolin) {
         completed = boolin;
@@ -35,14 +33,14 @@ public:
 
 int main()
 {
-    string version = "v0.1.0";
-    list<TodoItem> todoItems;
-    list<TodoItem>::iterator it;
+    std::string version = "v0.1.0";
+    std::list<TodoItem> todoItems;
+    std::list<TodoItem>::iterator it;
     
     // Inputs
     char input_sel;
     int input_id;
-    string input_desc;
+    std::string input_desc;
 
     srand(time(NULL));
 
@@ -56,33 +54,33 @@ int main()
 
     while (1) {
         system("cls");
-        cout << "Todo List Maker - " << version << endl;
-        cout << endl << endl;
+        std::cout << "Todo List Maker - " << version << std::endl;
+        std::cout << std::endl << std::endl;
 
         for (it = todoItems.begin(); it != todoItems.end(); it++) {
 
-            string completion = it->isCompleted() ? "done" : "not done";
+            std::string completion = it->isCompleted() ? "done" : "not done";
 
-            cout << it->getId() << " | " << it->getDescription() << " | " << completion << std::endl;
+            std::cout << it->getId() << " | " << it->getDescription() << " | " << completion << std::endl;
         }
 
         if (todoItems.empty()) {
             std::cout << "Add your first todo item!";
         }
 
-        cout << std::endl << std::endl << std::endl << "[a]dd a new todo" << endl;
-        cout << "[c]omplete a todo" << endl;
-        cout << "[q]uit" << std::endl << std::endl;
+        std::cout << std::endl << std::endl << std::endl << "[a]dd a new todo" << std::endl;
+        std::cout << "[c]omplete a todo" << std::endl;
+        std::cout << "[q]uit" << std::endl << std::endl;
         std::cout << "What will you do?: ";
 
         std::cin >> input_sel;
 
         switch (input_sel) {
         case 'q':
-            cout << "Bye!";
+            std::cout << "Bye!";
             return 0;
         case 'a': {
-            cout << "Add new task description: ";
+            std::cout << "Add new task description: ";
             std::cin.clear();                                   // clear the input buffer
             std::cin.ignore();                                  // ignore first return 
             std::getline(std::cin, input_desc);     // ensures that we can add spaces to our description string for TodoItem
